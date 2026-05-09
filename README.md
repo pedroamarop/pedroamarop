@@ -12,10 +12,10 @@
   <img style="100%" src="https://capsule-render.vercel.app/api?type=waving&height=100&section=header&reversal=true&fontSize=70&fontColor=FFFFFF&fontAlign=50&fontAlignY=50&stroke=-&descSize=20&descAlign=50&descAlignY=50&color=gradient"  />
 </div>
 
-###
+###Minhas Tecnologias
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=git,github,vscode,idea,js,html,css,python" />
+  <img src="https://skillicons.dev/icons?i=git,github,vscode,idea,js,html,css,python,java" />
 </div>
 
 ###
