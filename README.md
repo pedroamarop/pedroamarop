@@ -59,7 +59,7 @@ Desenvolvedor em formação apaixonado por entender **como as coisas funcionam p
 ### 🏅 Certificados
 
 <div align="center">
-  <img src="[https://fiap-achievements.vercel.app/api/badge?theme=dark&badge=918357](https://fiap-achievements.vercel.app/api/badge?theme=black&badge=918357)" width="100" />
+  <img src="https://fiap-achievements.vercel.app/api/badge?theme=dark&badge=918357](https://fiap-achievements.vercel.app/api/badge?theme=black&badge=918357)" width="100" />
 </div>
 
 <div align="center">
