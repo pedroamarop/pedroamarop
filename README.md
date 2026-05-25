@@ -51,7 +51,6 @@ Desenvolvedor em formação apaixonado por entender **como as coisas funcionam p
 
 <div align="center">
   <img src="https://streak-stats.demolab.com?user=pedroamarop&locale=pt_BR&mode=daily&theme=github-dark-blue&hide_border=true&border_radius=8" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api?username=pedroamarop&show_icons=true&theme=github_dark&hide_border=true&border_radius=8&icon_color=58a6ff&title_color=58a6ff" height="150" />
 </div>
 
 ---
