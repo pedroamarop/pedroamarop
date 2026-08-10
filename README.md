@@ -32,17 +32,20 @@ Desenvolvedor em formação apaixonado por entender **como as coisas funcionam p
 ---
 
 ### 🛠 Tecnologias
+
 <div align="center">
-![HTML5](https://img.shields.io/badge/HTML5-1a3a6b?style=for-the-badge&logo=html5&logoColor=a8c7fa)
-![CSS3](https://img.shields.io/badge/CSS3-0d2a5a?style=for-the-badge&logo=css3&logoColor=a8c7fa)
-![JavaScript](https://img.shields.io/badge/JavaScript-1a3a6b?style=for-the-badge&logo=javascript&logoColor=a8c7fa)
-![TypeScript](https://img.shields.io/badge/TypeScript-0d2a5a?style=for-the-badge&logo=typescript&logoColor=a8c7fa)
-![React](https://img.shields.io/badge/React-1a3a6b?style=for-the-badge&logo=react&logoColor=a8c7fa)
-![Java](https://img.shields.io/badge/Java-0d2a5a?style=for-the-badge&logo=openjdk&logoColor=a8c7fa)
-![Python](https://img.shields.io/badge/Python-1a3a6b?style=for-the-badge&logo=python&logoColor=a8c7fa)
-![Go](https://img.shields.io/badge/Go-0d2a5a?style=for-the-badge&logo=go&logoColor=a8c7fa)
-![Git](https://img.shields.io/badge/Git-1a3a6b?style=for-the-badge&logo=git&logoColor=a8c7fa)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-0d2a5a?style=for-the-badge&logo=intellij-idea&logoColor=a8c7fa)
+  
+  ![HTML5](https://img.shields.io/badge/HTML5-1a3a6b?style=for-the-badge&logo=html5&logoColor=a8c7fa)
+  ![CSS3](https://img.shields.io/badge/CSS3-0d2a5a?style=for-the-badge&logo=css3&logoColor=a8c7fa)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-1a3a6b?style=for-the-badge&logo=javascript&logoColor=a8c7fa)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-0d2a5a?style=for-the-badge&logo=typescript&logoColor=a8c7fa)
+  ![React](https://img.shields.io/badge/React-1a3a6b?style=for-the-badge&logo=react&logoColor=a8c7fa)
+  ![Java](https://img.shields.io/badge/Java-0d2a5a?style=for-the-badge&logo=openjdk&logoColor=a8c7fa)
+  ![Python](https://img.shields.io/badge/Python-1a3a6b?style=for-the-badge&logo=python&logoColor=a8c7fa)
+  ![Go](https://img.shields.io/badge/Go-0d2a5a?style=for-the-badge&logo=go&logoColor=a8c7fa)
+  ![Git](https://img.shields.io/badge/Git-1a3a6b?style=for-the-badge&logo=git&logoColor=a8c7fa)
+  ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-0d2a5a?style=for-the-badge&logo=intellij-idea&logoColor=a8c7fa)
+  
 </div>
 
 ---
