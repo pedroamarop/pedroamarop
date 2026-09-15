@@ -25,7 +25,7 @@
 
 ---
 
-### 🟢 Ficha de sistema
+### Ficha de sistema
 
 ```
 > ACESSANDO REGISTRO...
@@ -34,23 +34,27 @@
 
 USUÁRIO........: PEDRO AMARO
 FUNÇÃO.........: DATA ANALYST / AI IMPLEMENTATION
-ORGANIZAÇÃO....: ILHA FORTE (SEGUROS · CRÉDITO · CONSÓRCIO · BTG · EWZ)
+ORGANIZAÇÃO....: ILHA FORTE
 FORMAÇÃO.......: FIAP — ANÁLISE E DESENVOLVIMENTO DE SISTEMAS (2027)
 BASE...........: BRASIL
 ```
 
 ---
 
-### 🔵 Sobre mim
+### Sobre mim
 
-Analista de Dados na **Ilha Forte**, liderando a implementação de IA entre as unidades de negócio da empresa — da seleção de modelos e pipelines de fine-tuning (SFT + DPO + RLHF) até infraestrutura na AWS Bedrock, construção de bases de conhecimento e segurança de dados conforme a LGPD.
+Analista de Dados na **EWZ Capital**, liderando a implementação de IA entre as unidades de negócio da empresa — da seleção de modelos e pipelines de fine-tuning (SFT + DPO + RLHF) até infraestrutura na AWS Bedrock, construção de bases de conhecimento e segurança de dados conforme a LGPD.
 
 Estudante de Análise e Desenvolvimento de Sistemas na FIAP (previsão 2027), com raízes em produção audiovisual e uma abordagem de aprendizado que parte de código e erros reais — não de descrições abstratas.
 
-- 🤖 Implementação de IA em produção — seleção de modelos, fine-tuning e guardrails
-- ☁️ Infraestrutura AWS Bedrock e bases de conhecimento
-- 🌐 Desenvolvimento web — HTML, CSS, JavaScript, React
-- ☕ Lógica e orientação a objetos com Java
+- 🤖 Implementação de IA em produção — seleção de modelos, fine-tuning (SFT + DPO + RLHF) e guardrails de compliance
+- ☁️ Infraestrutura AWS Bedrock, bases de conhecimento e segurança de dados LGPD-compliant
+- 🌐 Desenvolvimento web — HTML, CSS, JavaScript, TypeScript e React
+- ☕ Lógica e orientação a objetos com Java e Spring Boot
+- 🐍 Python para automações e sistemas baseados em estruturas de dados
+- 🐹 Go como linguagem de sistemas
+- 🗄️ SQL para consultas e modelagem de dados
+- 🔌 Automação de fluxos com Node-RED e integrações IBM Watson (STT, Assistant, TTS)
 - 📈 Sempre buscando evoluir as habilidades técnicas
 
 ---
@@ -59,7 +63,7 @@ Estudante de Análise e Desenvolvimento de Sistemas na FIAP (previsão 2027), co
 
 | REG | PROJETO | ÁREA | DESCRIÇÃO |
 |---|---|---|---|
-| 001 | Ilha Forte — Implementação de IA | Corporativo / AI Infra | Liderança técnica da implantação de IA entre as unidades de negócio — seleção de modelos, pipelines SFT+DPO+RLHF, infraestrutura AWS Bedrock, bases de conhecimento e segurança de dados LGPD. |
+| 001 | EWZ Capital — Implementação de IA | Corporativo / AI Infra | Liderança técnica da implantação de IA entre as unidades de negócio — seleção de modelos, pipelines SFT+DPO+RLHF, infraestrutura AWS Bedrock, bases de conhecimento e segurança de dados LGPD. |
 | 002 | MoovUp (ex-SoulUp) | Acadêmico — FIAP | Plataforma de gamificação que converte interações sociais em créditos de passagem e cashback; em migração para React + TypeScript + Vite. |
 | 003 | Atmos | Acadêmico — FIAP (grupo) | Plataforma fictícia de monitoramento urbano via satélite (SAR); front-end em HTML/CSS/JS com metodologia BEM e chatbot Node-RED + IBM Watson. |
 | 004 | CineExplorer | Pessoal | Catálogo de filmes em React consumindo as APIs TMDB/OMDb, com deploy na Vercel. |
