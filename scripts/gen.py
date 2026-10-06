@@ -194,8 +194,13 @@ row += 1
 
 # interests
 plain(row, t, "interesses", AMB); row += 1; t += 0.1
-for it in ["aws", "ia", "python", "full-stack", "devops", "machine learning"]:
-    plain(row, t, "› " + it, HI); row += 1; t += 0.1
+for k, v in [("aws","Lambda · Bedrock · AgentCore · DynamoDB · Cognito · IAM · CloudWatch"),
+             ("ia","LLM agents · RAG · tool use · prompt engineering · MCP"),
+             ("python","asyncio · FastAPI · boto3 · pydantic · pytest"),
+             ("full-stack","REST/OpenAPI · TypeScript · React · serverless back-end"),
+             ("devops","CI/CD · GitHub Actions · IaC · observability · least privilege"),
+             ("ml","feature engineering · embeddings · avaliação · MLOps")]:
+    kv(row, t, k, v, HI if k in ("aws","ia") else AMB); row += 1; t += 0.1
 row += 1
 
 # final prompt
