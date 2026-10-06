@@ -106,9 +106,9 @@ def typed(row, t, cmd, speed=0.06):
     out.append(grp(t, f'<text x="{X0}" y="{y}" fill="{MID}">{PROMPT}</text><text x="{cx}" y="{y}" fill="{HI}" clip-path="url(#{cid})">{esc(cmd)}</text>'))
     return t + 0.2 + len(cmd)*speed
 
-def kv(row, t, k, v, vc=AMB):
+def kv(row, t, k, v, vc=AMB, col=10):
     y = Y0 + row*LH
-    out.append(grp(t, f'<text x="{X0}" y="{y}" fill="{KEY}">{k}</text><text x="{X0+10*CW}" y="{y}" fill="{vc}">{esc(v)}</text>'))
+    out.append(grp(t, f'<text x="{X0}" y="{y}" fill="{KEY}">{k}</text><text x="{X0+col*CW}" y="{y}" fill="{vc}">{esc(v)}</text>'))
 
 def plain(row, t, s, c=AMB, x=X0):
     out.append(grp(t, f'<text x="{x}" y="{Y0+row*LH}" fill="{c}" xml:space="preserve">{esc(s)}</text>'))
@@ -120,7 +120,7 @@ t = typed(row, 0.6, "fetch"); row += 1; t += 0.3
 plain(row, t, "pedro@dev", HI); row += 1
 plain(row, t, "─"*40, DIM); row += 1; t += 0.1
 for k, v in [("os","macOS"),("shell","zsh"),("editor","Claude Code"),
-             ("doing","IA aplicada · AWS Bedrock/AgentCore · back-end serverless"),
+             ("doing","AI aplicada · AWS Bedrock/AgentCore · back-end serverless"),
              ("github","github.com/pedroamarop")]:
     kv(row, t, k, v, HI if k == "github" else AMB); row += 1; t += 0.1
 row += 1
@@ -195,12 +195,12 @@ row += 1
 # interests
 plain(row, t, "interesses", AMB); row += 1; t += 0.1
 for k, v in [("aws","Lambda · Bedrock · AgentCore · DynamoDB · Cognito · IAM · CloudWatch"),
-             ("ia","LLM agents · RAG · tool use · prompt engineering · MCP"),
+             ("ai","LLM agents · RAG · tool use · prompt engineering · MCP"),
              ("python","asyncio · FastAPI · boto3 · pydantic · pytest"),
              ("full-stack","REST/OpenAPI · TypeScript · React · serverless back-end"),
              ("devops","CI/CD · GitHub Actions · IaC · observability · least privilege"),
              ("ml","feature engineering · embeddings · avaliação · MLOps")]:
-    kv(row, t, k, v, HI if k in ("aws","ia") else AMB); row += 1; t += 0.1
+    kv(row, t, k, v, HI if k in ("aws","ai") else AMB, 12); row += 1; t += 0.1
 row += 1
 
 # final prompt
