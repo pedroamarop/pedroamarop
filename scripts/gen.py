@@ -213,14 +213,6 @@ H = Y0 + (row+1)*LH + 18
 
 glow = "" if STATIC else 'filter="url(#glow)"'
 
-BG_OPACITY = 0.25                         # keep the background behind the text, not over it
-# background: "hyperspace-jump" by ASCII Magic (MIT) in its halftone dots look, rendered by node
-bg = ""
-try:
-    bg = subprocess.run(["node", os.path.join(os.path.dirname(__file__), "hyperspace.mjs"), str(W), str(H), "14", "10"]
-                        + (["--static"] if STATIC else []), capture_output=True, text=True, timeout=120, check=True).stdout
-except Exception as e:
-    print(f"hyperspace background skipped: {e}", file=sys.stderr)
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="pedro@dev terminal" shape-rendering="crispEdges">
 <defs>
 <filter id="glow" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="0.9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -233,7 +225,6 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewB
 <rect width="{W}" height="{H}" fill="#202022" stroke="#2c2c2e" stroke-width="2"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="{BG}"/>
 <g clip-path="url(#screen)">
-<g opacity="{BG_OPACITY}">{bg}</g>
 <g {glow}>{"".join(out)}</g>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#scan)"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#vig)"/>
@@ -243,7 +234,37 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewB
 dest = "/tmp/fetch_static.svg" if STATIC else OUT
 open(dest, "w").write(svg); print("wrote", dest)
 
+# ---------- banner ----------
+# "hyperspace-jump" by ASCII Magic (MIT) in its halftone dots look, rendered by node, under the name
+BH = int(os.environ.get("BANNER_H", 488))  # 488 shows the whole piece; lower crops it top and bottom
+BOUT = os.path.join(os.path.dirname(__file__), "..", "assets", "banner.svg")
+art = ""
+try:
+    art = subprocess.run(["node", os.path.join(os.path.dirname(__file__), "hyperspace.mjs"), str(W), str(BH), "14", "30"]
+                         + (["--static"] if STATIC else []), capture_output=True, text=True, timeout=120, check=True).stdout
+except Exception as e:
+    print(f"hyperspace animation skipped: {e}", file=sys.stderr)
+my = BH/2
+banner = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{BH}" viewBox="0 0 {W} {BH}" role="img" aria-label="Pedro Amaro">
+<defs>
+<filter id="lift" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="7"/><feComponentTransfer><feFuncA type="linear" slope="0.9"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="bscreen"><rect x="14" y="14" width="{W-28}" height="{BH-28}"/></clipPath>
+</defs>
+<rect width="{W}" height="{BH}" fill="#202022" stroke="#2c2c2e" stroke-width="2"/>
+<rect x="14" y="14" width="{W-28}" height="{BH-28}" fill="#04050c"/>
+<g clip-path="url(#bscreen)">{art}</g>
+<g filter="url(#lift)" text-anchor="middle" style="font-family:{FONT};white-space:pre">
+<text x="{W/2}" y="{my+8}" fill="#e8f4ff" style="font-size:46px;font-weight:700;letter-spacing:2px">Pedro Amaro</text>
+<text x="{W/2}" y="{my+40}" fill="#a8b4d8" style="font-size:15px">AI aplicada · AWS · back-end serverless</text>
+</g>
+<rect x="14" y="14" width="{W-28}" height="{BH-28}" fill="none" stroke="#000" stroke-opacity="0.6" stroke-width="2"/>
+</svg>'''
+bdest = "/tmp/banner_static.svg" if STATIC else BOUT
+open(bdest, "w").write(banner); print("wrote", bdest)
+
 if not STATIC:
     rd = os.path.join(os.path.dirname(__file__), "..", "README.md")
-    open(rd, "w").write(f'<div align="center">\n\n<img src="assets/fetch.svg?v={int(now.timestamp())}" alt="pedro@dev terminal" width="860" />\n\n'
-                         '<sub>background: <a href="https://www.ascii-magic.com/ascii/hyperspace-jump">hyperspace-jump</a> by ASCII Magic</sub>\n\n</div>\n')
+    v = int(now.timestamp())
+    open(rd, "w").write(f'<div align="center">\n\n<img src="assets/banner.svg?v={v}" alt="Pedro Amaro" width="860" />\n\n'
+                         f'<img src="assets/fetch.svg?v={v}" alt="pedro@dev terminal" width="860" />\n\n'
+                         '<sub>animation: <a href="https://www.ascii-magic.com/ascii/hyperspace-jump">hyperspace-jump</a> by ASCII Magic</sub>\n\n</div>\n')
