@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds assets/fetch.svg: retro dim-brown CRT terminal with live GitHub data.
 No dependencies. Set GITHUB_TOKEN to avoid API rate limits (the Action does)."""
-import os, re, sys, json, time, datetime as dt, urllib.request
+import os, re, sys, json, time, subprocess, datetime as dt, urllib.request
 
 USER = "pedroamarop"
 OUT = os.path.join(os.path.dirname(__file__), "..", "assets", "fetch.svg")
@@ -212,6 +212,14 @@ out.append(cur)
 H = Y0 + (row+1)*LH + 18
 
 glow = "" if STATIC else 'filter="url(#glow)"'
+
+# background: "hyperspace-jump" by ASCII Magic (MIT) in its halftone dots look, rendered by node
+bg = ""
+try:
+    bg = subprocess.run(["node", os.path.join(os.path.dirname(__file__), "hyperspace.mjs"), str(W), str(H), "14", "10"]
+                        + (["--static"] if STATIC else []), capture_output=True, text=True, timeout=120, check=True).stdout
+except Exception as e:
+    print(f"hyperspace background skipped: {e}", file=sys.stderr)
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="pedro@dev terminal" shape-rendering="crispEdges">
 <defs>
 <filter id="glow" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="0.9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -224,6 +232,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewB
 <rect width="{W}" height="{H}" fill="#202022" stroke="#2c2c2e" stroke-width="2"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="{BG}"/>
 <g clip-path="url(#screen)">
+{bg}
 <g {glow}>{"".join(out)}</g>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#scan)"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#vig)"/>
@@ -235,4 +244,5 @@ open(dest, "w").write(svg); print("wrote", dest)
 
 if not STATIC:
     rd = os.path.join(os.path.dirname(__file__), "..", "README.md")
-    open(rd, "w").write(f'<div align="center">\n\n<img src="assets/fetch.svg?v={int(now.timestamp())}" alt="pedro@dev terminal" width="860" />\n\n</div>\n')
+    open(rd, "w").write(f'<div align="center">\n\n<img src="assets/fetch.svg?v={int(now.timestamp())}" alt="pedro@dev terminal" width="860" />\n\n'
+                         '<sub>background: <a href="https://www.ascii-magic.com/ascii/hyperspace-jump">hyperspace-jump</a> by ASCII Magic</sub>\n\n</div>\n')
