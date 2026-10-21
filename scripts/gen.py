@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds assets/fetch.svg: retro dim-brown CRT terminal with live GitHub data.
+"""Builds assets/fetch.svg: a macOS Terminal window (dark mode) with live GitHub data.
 No dependencies. Set GITHUB_TOKEN to avoid API rate limits (the Action does)."""
 import os, re, sys, json, time, datetime as dt, urllib.request
 
@@ -85,16 +85,18 @@ repos.sort(key=lambda r: -r[1]); repos = repos[:5]
 if MOCK: push = ("omarchy-rainynight-theme", "2026-10-02T04:10:00Z", "fix waybar module spacing")
 
 # ---------- layout ----------
-CW, FS, LH, W, X0, Y0 = 8.4, 14, 22, 860, 40, 66
-BG, AMB, MID, DIM, KEY, HI = "#18181a", "#6a6a6c", "#5a5a5c", "#3f3f41", "#5a5a5c", "#9a9a9c"
-HEAT = ["#222224", "#38383a", "#4e4e50", "#6a6a6c", "#9a9a9c"]
+M, TB = 24, 28                            # margin for the window shadow, title bar height
+CW, FS, LH, W, X0, Y0 = 8.4, 14, 22, 860, M+20, M+TB+30
+BG, AMB, MID, DIM, KEY, HI = "#1e1e1e", "#c7c7cc", "#8e8e93", "#636366", "#8e8e93", "#f2f2f7"
+HEAT = ["#2c2c2e", "#48484a", "#6e6e73", "#a1a1a6", "#e5e5ea"]
 GRAPH = os.environ.get("GRAPH", "heatmap")   # "chart" (weekly bars) or "heatmap"
-FONT = "'JetBrains Mono','Fira Code','DejaVu Sans Mono',Consolas,Menlo,monospace"
+FONT = "'SF Mono',Menlo,Monaco,'JetBrains Mono','DejaVu Sans Mono',Consolas,monospace"
+UI_FONT = "-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif"
 esc = lambda s: s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
 out, clips = [], []
 def show(t): return "" if STATIC else f'<set attributeName="opacity" to="1" begin="{t:.2f}s" fill="freeze"/>'
 def grp(t, inner): return f'<g opacity="{1 if STATIC else 0}">{show(t)}{inner}</g>'
-PROMPT = "pedro@dev:~$ "; PW = len(PROMPT)*CW
+PROMPT = "pedro@MacBook-Pro ~ % "; PW = len(PROMPT)*CW
 
 def typed(row, t, cmd, speed=0.06):
     y = Y0 + row*LH; n = max(len(cmd), 1); cx = X0 + PW; cid = f"c{row}"
@@ -115,9 +117,9 @@ def plain(row, t, s, c=AMB, x=X0):
 
 now = dt.datetime.now(dt.timezone.utc)
 row, t = 0, 0.2
-plain(row, t, f"Last login: {now:%a %b %-d %H:%M} UTC on tty1", DIM); row += 2
+plain(row, t, f"Last login: {now:%a %b %-d %H:%M:%S} on ttys000", DIM); row += 2
 t = typed(row, 0.6, "fetch"); row += 1; t += 0.3
-plain(row, t, "pedro@dev", HI); row += 1
+plain(row, t, "pedro@MacBook-Pro", HI); row += 1
 plain(row, t, "─"*40, DIM); row += 1; t += 0.1
 for k, v in [("os","macOS"),("shell","zsh"),("editor","Claude Code"),
              ("doing","AI aplicada · AWS Bedrock/AgentCore · back-end serverless"),
@@ -127,7 +129,7 @@ row += 1
 
 # contribution graph
 plain(row, t, f"contrib   {total} in the last year   streak {streak}d   best {longest}d", AMB); row += 1; t += 0.1
-P, S = 14, 11
+P, S = 13, 10
 gx, gy = X0 + 34, Y0 + row*LH + 4
 first = days[0][0]
 off = (first.weekday()+1) % 7                       # Sunday-first
@@ -209,26 +211,29 @@ cy = Y0 + row*LH; cx = X0 + PW
 cur = f'<rect x="{cx}" y="{cy-FS+1}" width="{CW}" height="{FS+2}" fill="{HI}"'
 cur += '/>' if STATIC else f' opacity="0"><set attributeName="opacity" to="1" begin="{t:.2f}s"/><animate attributeName="opacity" values="1;0" calcMode="discrete" dur="1.1s" begin="{t:.2f}s" repeatCount="indefinite"/></rect>'
 out.append(cur)
-H = Y0 + (row+1)*LH + 18
+H = Y0 + (row+1)*LH + 14 + M
 
-glow = "" if STATIC else 'filter="url(#glow)"'
-svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="pedro@dev terminal" shape-rendering="crispEdges">
+WX, WY, WW, WH = M, M, W-2*M, H-2*M         # the window
+title = "pedro — -zsh — 80×24"
+lights = "".join(f'<circle cx="{WX+20+i*20}" cy="{WY+TB/2}" r="6" fill="{c}" stroke="{e}" stroke-width="0.5"/>'
+                 for i,(c,e) in enumerate([("#ff5f57","#e0443e"),("#febc2e","#dea123"),("#28c840","#1aab29")]))
+svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="macOS terminal: pedro">
 <defs>
-<filter id="glow" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="0.9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-<pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse"><rect width="4" height="1" y="2" fill="#000" opacity="0.28"/></pattern>
-<radialGradient id="vig" cx="50%" cy="50%" r="75%"><stop offset="60%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="0.65"/></radialGradient>
-<clipPath id="screen"><rect x="14" y="14" width="{W-28}" height="{H-28}"/></clipPath>
+<filter id="shadow" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="10" stdDeviation="11" flood-color="#000" flood-opacity="0.45"/></filter>
+<linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3c"/><stop offset="1" stop-color="#2e2e30"/></linearGradient>
+<clipPath id="win"><rect x="{WX}" y="{WY}" width="{WW}" height="{WH}" rx="10"/></clipPath>
 {"".join(clips)}
 </defs>
 <style>text{{font-family:{FONT};font-size:{FS}px;white-space:pre}}</style>
-<rect width="{W}" height="{H}" fill="#202022" stroke="#2c2c2e" stroke-width="2"/>
-<rect x="14" y="14" width="{W-28}" height="{H-28}" fill="{BG}"/>
-<g clip-path="url(#screen)">
-<g {glow}>{"".join(out)}</g>
-<rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#scan)"/>
-<rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#vig)"/>
+<rect x="{WX}" y="{WY}" width="{WW}" height="{WH}" rx="10" fill="{BG}" filter="url(#shadow)"/>
+<g clip-path="url(#win)">
+<rect x="{WX}" y="{WY}" width="{WW}" height="{TB}" fill="url(#bar)"/>
+<rect x="{WX}" y="{WY+TB-1}" width="{WW}" height="1" fill="#0f0f10"/>
+{lights}
+<text x="{W/2}" y="{WY+TB/2+4.5}" text-anchor="middle" fill="#a1a1a6" style="font-family:{UI_FONT};font-size:13px;font-weight:600">{title}</text>
+<g>{"".join(out)}</g>
 </g>
-<rect x="14" y="14" width="{W-28}" height="{H-28}" fill="none" stroke="#000" stroke-opacity="0.6" stroke-width="2"/>
+<rect x="{WX+0.5}" y="{WY+0.5}" width="{WW-1}" height="{WH-1}" rx="10" fill="none" stroke="#4a4a4c" stroke-opacity="0.9"/>
 </svg>'''
 dest = "/tmp/fetch_static.svg" if STATIC else OUT
 open(dest, "w").write(svg); print("wrote", dest)
