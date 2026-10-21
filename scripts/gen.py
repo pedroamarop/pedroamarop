@@ -213,6 +213,7 @@ H = Y0 + (row+1)*LH + 18
 
 glow = "" if STATIC else 'filter="url(#glow)"'
 
+BG_OPACITY = 0.25                         # keep the background behind the text, not over it
 # background: "hyperspace-jump" by ASCII Magic (MIT) in its halftone dots look, rendered by node
 bg = ""
 try:
@@ -232,7 +233,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewB
 <rect width="{W}" height="{H}" fill="#202022" stroke="#2c2c2e" stroke-width="2"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="{BG}"/>
 <g clip-path="url(#screen)">
-{bg}
+<g opacity="{BG_OPACITY}">{bg}</g>
 <g {glow}>{"".join(out)}</g>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#scan)"/>
 <rect x="14" y="14" width="{W-28}" height="{H-28}" fill="url(#vig)"/>
